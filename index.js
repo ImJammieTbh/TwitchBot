@@ -2,10 +2,15 @@ console.log('Happy developing ✨');
 
 const { Initialise } = require('./twitchClient');
 require('./terminal');
+const { client } = require('./twitchClient');
 const { startStreamWatcher } = require('./streamWatcher');
-const { startChatCommands } = require('./chatCommands');
+const { startCommandListener } = require('./commandListener');
 
 Initialise();
 
-startChatCommands();
-startStreamWatcher();
+client.on('connected',() => {
+    console.log('[INIT]: Bot connected to twitch');
+
+    startCommandListener();
+    startStreamWatcher();
+})

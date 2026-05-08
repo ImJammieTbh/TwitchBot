@@ -7,19 +7,15 @@ const { liveChannels, joinedChannels } = require('./state');
 
 let intervalStarted = false;
 
-function startStreamWatcher() {
+async function startStreamWatcher() {
     console.log('[INIT]: Starting Module: StreamWatcher');
 
-    client.on('connected', async () => {
-        console.log('[INIT]: Bot connected to server!');
+    if (!intervalStarted) {
+        intervalStarted = true;
 
-        if (!intervalStarted) {
-            intervalStarted = true;
-
-            await checkLiveStreams();
-            setInterval(checkLiveStreams, 10 * 1000);
-        }
-    });
+        await checkLiveStreams();
+        setInterval(checkLiveStreams, 10 * 1000);
+    }
 }
 
 async function checkLiveStreams() {

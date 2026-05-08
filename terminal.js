@@ -2,6 +2,8 @@ const readline = require('readline');
 const { client } = require('./twitchClient');
 const { joinedChannels } = require('./state')
 
+const { reloadCommands } = require('./commandManager')
+
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -16,6 +18,7 @@ list
 status
 reconnect
 say <channel> <message>
+reload commands
 `);
 
 rl.on('line', async (input) => {
@@ -80,6 +83,11 @@ rl.on('line', async (input) => {
 
                 await client.say(channel.startsWith('#') ? channel : `#${channel}`, message);
                 console.log(`[SAY]: #${channel} -> ${message}`);
+                break;
+            }
+
+            case 'reload-commands': {
+                reloadCommands();
                 break;
             }
 
