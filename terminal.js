@@ -91,6 +91,33 @@ rl.on('line', async (input) => {
                 break;
             }
 
+            case 'shutdown':
+            case 'stop':
+            case 'exit':
+                console.log('Shutting down bot...');
+
+                for (const ch of [...joinedChannels]) {
+                    try {
+                        await client.part(ch);
+                        console.log(`Left ${ch}`);
+                    } catch (e) {
+                        console.error(`Failed to leave ${ch}`, e);
+                    }
+                }
+
+                joinedChannels.clear();
+
+                try {
+                    await client.disconnect();
+                    console.log('Disconnected from Twitch');
+                } catch (e) {
+                    console.error('Disconnect error:', e);
+                }
+
+                rl.close();
+                process.exit(0);
+                break;
+
             default:
                 console.log('Unknown command');
         }

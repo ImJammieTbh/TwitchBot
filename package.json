@@ -2,9 +2,19 @@
   "name": "MakingThatBot",
   "version": "1.0.0",
   "description": "",
-  "main": "bot.js",
+  "main": "index.js",
+  "bin": "index.js",
+  "pkg": {
+    "scripts": [
+      "*.js"
+    ],
+    "assets" : [
+      "*.js"
+    ]
+  },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "pkg . --targets node18-win-x64 --no-bytecode --output dist/MakingThatBot.exe && xcopy commands dist\\commands /E /I /Y"
   },
   "private": true,
   "dependencies": {
