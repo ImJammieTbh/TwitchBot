@@ -7,12 +7,14 @@ function startCommandListener() {
     client.on('message', (channel, userstate, message, self) => {
         if (self) return;
 
+        if (!message.startsWith('!')) return;
+
         const commands = getCommands();
 
         if (!commands) return;
 
         const args = message.trim().split(' ');
-        const cmdName = args[0].toLowerCase().replace('!', '');
+        const cmdName = args[0].slice(1).toLowerCase();
 
         const command = commands.get(cmdName);
 
