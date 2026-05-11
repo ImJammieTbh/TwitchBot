@@ -21,6 +21,7 @@ function startCommandListener() {
         if (!command) return;
 
         command.run(client, channel, userstate, args.slice(1));
+        console.log(`[COMMAND]: ${userstate.username} running command: ${cmdName}`);
     });
 }
 
