@@ -8,7 +8,7 @@ module.exports = {
             const today = new Date();
 
             const nlDate = new Date(
-                now.toLocaleString("en-US", { timeZone: "Europe/Amsterdam" })
+                today.toLocaleString("en-US", { timeZone: "Europe/Amsterdam" })
             );
 
             today.setHours(0,0,0,0);

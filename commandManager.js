@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const commandsPath = path.join(
-    path.dirname(process.execPath),
-    'commands'
-);
+const basePath = process.pkg
+    ? path.dirname(process.execPath) // pkg executable folder
+    : __dirname;                     // normal development
+
+const commandsPath = path.join(basePath, 'commands');
 
 let commands = new Map();
 
@@ -16,11 +17,15 @@ function loadCommands() {
     for (const file of files) {
         if (!file.endsWith('.js')) continue;
 
-        const cmd = require(path.join(commandsPath, file));
+        const fullPath = path.join(commandsPath, file);
+
+        delete require.cache[require.resolve(fullPath)];
+
+        const cmd = require(fullPath);
 
         commands.set(cmd.name, cmd);
 
-        // register aliases too
+        // aliases
         if (cmd.aliases && cmd.aliases.length) {
             for (const alias of cmd.aliases) {
                 commands.set(alias, cmd);
@@ -32,17 +37,7 @@ function loadCommands() {
 }
 
 function reloadCommands() {
-    const files = fs.readdirSync(commandsPath);
-
-    for (const file of files) {
-        if (!file.endsWith('.js')) continue;
-
-        const fullPath = path.join(commandsPath, file);
-        delete require.cache[require.resolve(fullPath)];
-    }
-
     loadCommands();
-
     console.log('[RELOAD]: Commands reloaded');
 }
 

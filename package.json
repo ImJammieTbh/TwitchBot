@@ -9,7 +9,8 @@
       "*.js"
     ],
     "assets": [
-      "*.js"
+      "*.js",
+      "commands/**/*"
     ]
   },
   "scripts": {
