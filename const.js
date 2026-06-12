@@ -6,6 +6,9 @@ const BOT_USERNAME = process.env.BOT_USERNAME;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
+console.log("CHANNEL_NAMES:", process.env.CHANNEL_NAMES);
+console.log("BOT_USERNAME:", process.env.BOT_USERNAME);
+
 module.exports = {
     CHANNEL_NAMES,
     BOT_USERNAME,

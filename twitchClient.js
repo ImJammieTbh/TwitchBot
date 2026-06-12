@@ -1,5 +1,5 @@
 const tmi = require("tmi.js");
-const {BOT_USERNAME, OAUTH_TOKEN} = require("./const");
+const {BOT_USERNAME, OAUTH_TOKEN, CHANNEL_NAMES} = require("./const");
 
 
 const client = new tmi.Client({

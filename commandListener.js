@@ -17,8 +17,10 @@ function startCommandListener() {
         const cmdName = args[0].slice(1).toLowerCase();
 
         const command = commands.get(cmdName);
-
         if (!command) return;
+
+        //Channel Check
+        if (command.channels?.length && !command.channels.includes(channel)) return;
 
         command.run(client, channel, userstate, args.slice(1));
         console.log(`[COMMAND]: ${userstate.username} running command: ${cmdName}`);

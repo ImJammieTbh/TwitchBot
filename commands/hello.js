@@ -3,5 +3,6 @@ module.exports = {
     aliases: ["hi"],
     run: (client, channel, userstate) => {
         client.say(channel, `@${userstate.username}, heya!!!`);
+        console.log("[COMMAND]: commands response success")
     }
 };

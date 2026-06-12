@@ -1,6 +1,7 @@
 module.exports = {
     name: "jcbday",
     aliases: ["bday", "birthday", "happybirthday", "hapbirth", "birth"],
+    channels: ["#lytzsifer"],
 
     run: (client, channel, userstate) => {
 
@@ -31,11 +32,13 @@ module.exports = {
                 channel,
                 `Wooooooooo, Happy Fucking Birthday JC from @${userstate.username}`
             );
+            console.log("[COMMAND]: commands response success")
         } else {
             client.say(
                 channel,
                 `${days} days until JC's birthday`
             );
+            console.log("[COMMAND]: commands response success")
         }
     }
 };
