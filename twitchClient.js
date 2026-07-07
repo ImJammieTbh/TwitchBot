@@ -3,7 +3,7 @@ const {BOT_USERNAME, OAUTH_TOKEN, CHANNEL_NAMES} = require("./const");
 
 
 const client = new tmi.Client({
-    options: { debug: false },
+    options: { debug: true },
     identity: {
         username: BOT_USERNAME,
         password: OAUTH_TOKEN,

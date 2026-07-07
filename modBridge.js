@@ -17,8 +17,14 @@ function getServerForChannel(channel) {
 }
 
 function sendAction(channel, action, data = {}) {
+    const { ign } = getServerForChannel(channel);
+    if (channel.slice(1) != ign) {
+        data.player = ign;
+    }
     return new Promise((resolve, reject) => {
-        const { host, port } = getServerForChannel(channel);
+
+        const { host, port, ign } = getServerForChannel(channel);
+        console.log(`${ign}`);
         const socket = net.createConnection({ host, port }, () => {
             const payload = JSON.stringify({ action, ...data });
             socket.write(payload + '\n');
